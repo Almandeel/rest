@@ -13,6 +13,7 @@
 
 Route::prefix('subscription')->group(function() {
     Route::get('/', 'SubscriptionController@dashboard')->name('subscription.dashboard');
+    Route::get('subscriptions/barcode/{id}', 'SubscriptionController@barcode')->name('subscriptions.barcodes');
     Route::resources([
         'subscriptions' => 'SubscriptionController',
         'plans' => 'PlanController',

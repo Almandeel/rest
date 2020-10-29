@@ -17,6 +17,10 @@
                     <i class="fa fa-plus"> إضافة</i>
                 </button>
             @endpermission
+
+            @permission('subscriptions-print')
+                <a  style="display:inline-block; margin-left:1%" href="{{ route('subscriptions.barcodes', 'all') }}" class="btn btn-default pull-right  btn-sm print" > <i class="fa fa-print"> طباعة </i></a>
+            @endpermission
         </div>
         <div class="box-body">
             <table id="subscriptions-table" class="table datatable table-bordered table-hover text-center">

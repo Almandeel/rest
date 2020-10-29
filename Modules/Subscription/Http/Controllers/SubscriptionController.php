@@ -24,7 +24,7 @@ class SubscriptionController extends Controller
     {
         $subscriptions      = Subscription::all();
         $plans              = Plan::all();
-        $customers          = Customer::whereNotIn('id', $subscriptions->pluck('customer_id')->toArray())->get();
+        $customers          = Customer::whereNotIn('id', $subscriptions->where('customer_id', '!=',14)->pluck('customer_id')->toArray())->get();
         return view('subscription::subscriptions.index', compact('subscriptions', 'plans', 'customers'));
     }
 
@@ -129,5 +129,19 @@ class SubscriptionController extends Controller
         $subscription->delete();
 
         return redirect()->route('subscriptions.index')->with('success', 'تمت العملية بنجاح');
+    }
+
+    public function barcode($id) 
+    {
+        $subscriptions;
+        if($id == "all")
+        {
+            $subscriptions = Subscription::all();
+        }
+        else 
+        {
+            $subscriptions = Subscription::where('id', $id)->get();
+        }
+        return view('subscription::subscriptions.barcode', compact('subscriptions'));
     }
 }
