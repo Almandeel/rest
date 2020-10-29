@@ -180,8 +180,8 @@
                             <li class="{{ !isset($crumbs) && request()->segment(1) == '' ? 'active' : '' }}"><a href="/"><i class="fa fa-dashboard"></i><span>لوحة التحكم</span></a></li>
                             @if ((request()->segment(1) == 'restaurant'))
                                 <li class="{{ !isset($crumbs) && request()->segment(1) == 'restaurant' ? 'active' : '' }}"><a href="{{ route('restaurant.dashboard') }}">
-                                    <i class="fa fa-th-large"></i>
-                                    <span>المطاعم</span>
+                                    <i class="{{ config('restaurant.icon') }}"></i>
+                                    <span>{{ config('restaurant.name') }}</span>
                                 </a></li>
                             @elseif ((request()->segment(1) == 'cashier'))
                                 <li class="{{ !isset($crumbs) && request()->segment(1) == 'cashier' ? 'active' : '' }}"><a href="{{ route('cashier.dashboard') }}">
@@ -401,7 +401,7 @@
     </div><!-- end of wrapper -->
 @endpush
 @push('foot')
-    @isset($datatable)
+    {{--  @isset($datatable)
         <script src="{{ asset('dashboard/datatables.net/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('dashboard/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
         <script>
@@ -459,7 +459,7 @@
                 }
             })
         </script>
-    @endisset
+    @endisset  --}}
     @if (isset($jqueryUI))
         <style>
             tbody tr{cursor: move;}
@@ -614,9 +614,9 @@
             $.fn.select2.defaults.set( "theme", "bootstrap" );
             $(function () {
                 $('select').select2({
-                dir: "rtl",
-                dropdownAutoWidth: true,
-                language: "ar"
+                    dir: "rtl",
+                    dropdownAutoWidth: true,
+                    language: "ar",
                 });
             })
         </script>
@@ -658,6 +658,15 @@
                 })
             })
         })
+        function sweet(title, text, icon = 'info'){
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: icon,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'حسنا',
+            })
+        }
     </script>
     @stack('dashboard_foot')
 @endpush

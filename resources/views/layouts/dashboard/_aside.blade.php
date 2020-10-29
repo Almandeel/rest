@@ -21,6 +21,10 @@
                 <li class="{{ (request()->segment(1) == 'stores') ? 'active' : '' }}"><a href="{{ route('stores.index') }}"><i class="fa fa-home"></i><span>  المخازن </span></a></li>
             @endpermission
 
+            @permission('stores-read')
+                <li class="{{ (request()->segment(1) == 'transferstores') ? 'active' : '' }}"><a href="{{ route('transferstores.index') }}"><i class="fa fa-home"></i><span>  التحويلات </span></a></li>
+            @endpermission
+
             @permission('items-read')
                 <li class="{{ (request()->segment(1) == 'items') ? 'active' : '' }}"><a href="{{ route('items.index') }}"><i class="fa fa-cubes"></i><span>  المنتجات </span></a></li>
             @endpermission

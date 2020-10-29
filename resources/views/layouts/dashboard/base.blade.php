@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="{{ asset('dashboard/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/parsley.css')}}">
     <link rel="stylesheet" href="{{ asset('dashboard/plugins/sweetalert2/sweetalert2.min.css') }}">
+    @isset($printable)
+        <link rel="stylesheet" href="{{ asset('libs/Print.js/dist/print.min.css') }}">
+    @endisset
     @if (app()->getLocale() == 'ar')
         <link rel="stylesheet" href="{{ asset('dashboard/css/font-awesome-rtl.min.css') }}">
         <link rel="stylesheet" href="{{ asset('dashboard/css/AdminLTE-rtl.min.css') }}">
@@ -79,6 +82,14 @@
         }
         .modal-title{display: inline-block;}
         form.btn label:hover{cursor: pointer;}
+        .table-hide-header thead {
+            display: none;
+        }
+        @media print {
+            .print-hide{
+                display: none;
+            }
+        }
     </style>
     {{--<!-- jQuery 3 -->--}}
     <script src="{{ asset('dashboard/js/jquery.min.js') }}"></script>
@@ -107,6 +118,8 @@
     <script src="{{ asset('libs/parsleyjs/parsley.js')}}"></script>
     <script src="{{ asset('libs/parsleyjs/i18n/ar.js')}}"></script>
 
+    @includeWhen(isset($datatable), 'partials._datatabe')
+    
     {{--icheck--}}
     <script src="{{ asset('dashboard/plugins/icheck/icheck.min.js') }}"></script>
 
@@ -118,6 +131,12 @@
 
     {{--<!-- Sweetalert2 js -->--}}
     <script src="{{ asset('dashboard/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    @isset($tabletojson)
+    <script src="{{ asset('libs/jquery.tabletojson/jquery.tabletojson.min.js') }}"></script>
+    @endisset
+    @isset($printable)
+    <script src="{{ asset('libs/Print.js/dist/print.min.js') }}"></script>
+    @endisset
     
     {{--<!-- AdminLTE App -->--}}
     <script src="{{ asset('dashboard/js/adminlte.min.js') }}"></script>
